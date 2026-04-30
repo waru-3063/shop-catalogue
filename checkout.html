@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Checkout</title>
+<link rel="stylesheet" href="style3.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Checkout</h1>
+
+    <div id="checkoutItems"></div>
+
+    <h2>Total: $<span id="checkoutTotal"></span></h2>
+
+    <button onclick="placeOrder()">Place Order</button>
+</div>
+
+<script src="script3.js"></script>
+
+<script>
+function renderCheckout() {
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const container = document.getElementById("checkoutItems");
+
+    let total = 0;
+
+    cartItems.forEach(id => {
+        const p = products.find(x => x.id === id);
+        total += p.price;
+
+        const div = document.createElement("div");
+        div.innerText = `${p.name} - $${p.price}`;
+        container.appendChild(div);
+    });
+
+    document.getElementById("checkoutTotal").innerText = total;
+}
+
+function placeOrder() {
+    alert("✅ Order placed successfully!");
+    localStorage.removeItem("cart");
+    window.location.href = "index.html";
+}
+
+renderCheckout();
+</script>
+
+</body>
+</html>
